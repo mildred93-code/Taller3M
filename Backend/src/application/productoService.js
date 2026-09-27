@@ -1,5 +1,4 @@
-const UserRepositoryAdapter = require("../infrastructure/userRepositoryAdapter"); // O puedes crear tu propio adaptador de productos
-// Nota: Aquí crearemos un adaptador específico para productos ahorita abajo.
+const UserRepositoryAdapter = require("../infrastructure/userRepositoryAdapter");
 
 class ProductoService {
   constructor(productoRepository) {

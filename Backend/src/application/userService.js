@@ -11,13 +11,11 @@ class UserService {
   }
 
   async registerUser(nombre, email, password) {
-    // Verificar si el usuario ya existe
     const existingUser = await this.userRepository.findByEmail(email);
     if (existingUser) {
       throw { status: 409, msg: "El correo ya está registrado" };
     }
 
-    // Encriptar la contraseña con bcrypt
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
