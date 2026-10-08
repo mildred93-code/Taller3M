@@ -26,3 +26,34 @@ CREATE TABLE IF NOT EXISTS pedido_productos (
     producto_id INT REFERENCES productos(id) ON DELETE CASCADE,
     cantidad INT NOT NULL
 );
+
+-- ==========================================
+-- DATOS INICIALES DE PRUEBA
+-- ==========================================
+
+-- Usuarios (Contraseñas con hash bcrypt: admin123 y 123456)
+INSERT INTO usuarios (nombre, email, password) VALUES
+('Admin Sistema', 'admin@tienda.com', '$2a$10$iP9ic04xp1yfWKsiVmB9z.m6UJJPEB31wNTJRmVnDVMXqRWervZKy'),
+('Juan Perez', 'juan@ejemplo.com', '$2a$10$4PT3TpEByk2kWU7IehP4u./0yWIv/jSNxLRC6Sev3TAbyalL5JstO'),
+('Maria Lopez', 'maria@ejemplo.com', '$2a$10$4PT3TpEByk2kWU7IehP4u./0yWIv/jSNxLRC6Sev3TAbyalL5JstO')
+ON CONFLICT (email) DO NOTHING;
+
+-- Productos
+INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
+('Laptop Dell Inspiron', 'Laptop con procesador Intel i7 y 16GB RAM', 1299.99, 15),
+('Smartphone Samsung Galaxy', 'Telefono movil 128GB pantalla AMOLED', 799.50, 25),
+('Auriculares Inalambricos Sony', 'Cancelacion activa de ruido y Bluetooth', 149.99, 40),
+('Teclado Mecanico RGB', 'Teclado para gaming con switches mecanicos', 89.90, 30),
+('Monitor 27 Pulgadas 4K', 'Monitor IPS UHD para productividad y gaming', 349.00, 10),
+('Mouse Inalambrico Ergonomico', 'Mouse optico recargable de alta precision', 35.50, 50);
+
+-- Pedidos
+INSERT INTO pedidos (usuario_id, total) VALUES
+(1, 1449.98),
+(2, 799.50);
+
+-- Detalle de Pedidos
+INSERT INTO pedido_productos (pedido_id, producto_id, cantidad) VALUES
+(1, 1, 1),
+(1, 3, 1),
+(2, 2, 1);
