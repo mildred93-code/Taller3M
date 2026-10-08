@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "../config";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -24,7 +25,7 @@ function Usuarios() {
     setLoading(true);
     setErrorMsg("");
     try {
-      const response = await fetch("http://localhost:3000/usuarios");
+      const response = await fetch(`${API_BASE_URL}/usuarios`);
       const data = await response.json();
       if (response.ok) {
         setUsuarios(data);
@@ -32,7 +33,7 @@ function Usuarios() {
         throw new Error(data.msg || "Error al obtener usuarios");
       }
     } catch (err) {
-      setErrorMsg("No se pudo conectar con el servidor backend (http://localhost:3000/usuarios). Verifique que el servidor Node.js esté ejecutándose.");
+      setErrorMsg(`No se pudo conectar con el servidor backend (${API_BASE_URL}/usuarios). Verifique que el servidor Node.js esté ejecutándose.`);
     } finally {
       setLoading(false);
     }
@@ -49,7 +50,7 @@ function Usuarios() {
     setSuccessMsg("");
 
     try {
-      const response = await fetch("http://localhost:3000/usuarios", {
+      const response = await fetch(`${API_BASE_URL}/usuarios`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -84,7 +85,7 @@ function Usuarios() {
     setSuccessMsg("");
 
     try {
-      const response = await fetch(`http://localhost:3000/usuarios/${usuarioEditar.id}`, {
+      const response = await fetch(`${API_BASE_URL}/usuarios/${usuarioEditar.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -117,7 +118,7 @@ function Usuarios() {
     setSuccessMsg("");
 
     try {
-      const response = await fetch(`http://localhost:3000/usuarios/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/usuarios/${id}`, {
         method: "DELETE",
       });
 

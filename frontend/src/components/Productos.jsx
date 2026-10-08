@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_BASE_URL } from "../config";
 
 function Productos() {
   const [productos, setProductos] = useState([]);
@@ -10,7 +11,7 @@ function Productos() {
 
   const fetchProductos = async () => {
     try {
-      const response = await fetch("http://localhost:3000/productos");
+      const response = await fetch(`${API_BASE_URL}/productos`);
       const data = await response.json();
       if (response.ok) {
         setProductos(data);
@@ -29,7 +30,7 @@ function Productos() {
     setErrorMsg("");
 
     try {
-      const response = await fetch("http://localhost:3000/productos", {
+      const response = await fetch(`${API_BASE_URL}/productos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -61,7 +62,7 @@ function Productos() {
     if (!window.confirm("¿Estás seguro de eliminar este producto?")) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/productos/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/productos/${id}`, {
         method: "DELETE",
       });
 

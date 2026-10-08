@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_BASE_URL } from "../config";
 
 function Login({ onLoginSuccess }) {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -34,7 +35,7 @@ function Login({ onLoginSuccess }) {
       return;
     }
 
-    const endpoint = isRegistering ? "http://localhost:3000/usuarios" : "http://localhost:3000/login";
+    const endpoint = isRegistering ? `${API_BASE_URL}/usuarios` : `${API_BASE_URL}/login`;
     const bodyData = isRegistering ? { nombre, email, password } : { email, password };
 
     try {

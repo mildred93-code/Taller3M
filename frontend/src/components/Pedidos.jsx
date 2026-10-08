@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 
 export default function Pedidos({ usuarioId }) {
   const [productos, setProductos] = useState([]);
@@ -6,7 +7,7 @@ export default function Pedidos({ usuarioId }) {
   const [mensaje, setMensaje] = useState('');
 
   const cargarProductos = () => {
-    fetch('http://localhost:3000/productos')
+    fetch(`${API_BASE_URL}/productos`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -46,7 +47,7 @@ export default function Pedidos({ usuarioId }) {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/pedidos', {
+      const response = await fetch(`${API_BASE_URL}/pedidos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
